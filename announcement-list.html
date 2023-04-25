@@ -1,0 +1,159 @@
+<content id="data-content">
+
+    <style>
+        /* Insert your CSS overrides here */
+
+        .template--listNewsLayout {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .template--listNewsLayoutItem--result {
+            display: flex;
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-bottom-color: {{@root.theme.palette.neutralLight}};
+        }
+
+
+        .template--listNewsLayoutItem--content {
+            flex-basis: 0;
+            flex-grow: 1;
+            justify-content: space-between;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .template-listNewsLayoutItem--site {
+            font-size: 12px;
+            margin-bottom: 2px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .template-listNewsLayoutItem--site a, .template-listNewsLayoutItem--site a:link, .template-listNewsLayoutItem--site a:visited, .template-listNewsLayoutItem--site a:active, .template-listNewsLayoutItem--site a:hover, .template-listNewsLayoutItem--site a:focus {
+            color: {{@root.theme.palette.themePrimary}};
+            text-decoration: none;
+        }
+
+        .template--listNewsLayoutItem--title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            margin-top: 3px;
+        }
+        .template--listNewsLayoutItem--title a, .template--listNewsLayoutItem--title a:hover, .template--listNewsLayoutItem--title a:active, .template--listNewsLayoutItem--title a:focus, .template--listNewsLayoutItem--title a:visited {
+            color: {{@root.theme.palette.neutralPrimary}};
+            text-decoration: none;
+        }
+        .template--listNewsLayoutItem--desc {
+            font-size: 16px;
+            font-weight: 400px;
+            color: {{@root.theme.palette.neutralSecondary}};
+        }
+        .template--listNewsLayoutItem--desc a, .template--listNewsLayoutItem--desc a:hover, .template--listNewsLayoutItem--desc a:active, .template--listNewsLayoutItem--desc a:focus, .template--listNewsLayoutItem--desc a:visited {
+            color: {{@root.theme.palette.themePrimary}};
+            text-decoration: none;
+        }
+
+
+        @media screen and (max-width: 832px){
+
+            .template--listNewsLayoutItem--result {
+                margin-bottom: 20px;
+                padding-bottom: 20px;
+            }
+            .template--listNewsLayoutItem--title {
+                font-size: 16px;
+            }
+            .template--listNewsLayoutItem--desc {
+                font-size: 14px;
+            }
+        }
+
+
+        
+    </style>
+
+    <div class="template">
+
+        <ul class="template--listNewsLayout">
+            {{#each data.items as |item|}}
+            <li tabindex="0">
+                {{#> resultTypes item=item}}
+                <div class="template--listNewsLayoutItem--result">
+                    <div class="template--listNewsLayoutItem--content">
+                        <div class="template-listNewsLayoutItem--site">
+                            <a href="{{slot item @root.slots.SPSiteUrl}}" data-interception="off">{{slot item @root.slots.SiteTitle}}</a>
+                        </div>
+                        <div class="template--listNewsLayoutItem--title">
+                            <a href="{{slot item @root.slots.PreviewUrl}}" target="_blank" data-interception="off">{{slot item @root.slots.Title}}</a>
+                        </div>
+                    
+                        <div class="template--listNewsLayoutItem--desc">{{getSummary (slot item @root.slots.Summary)}}</div>
+
+                    </div>
+                </div>
+                {{/resultTypes}}
+            </li>
+            {{/each}}
+        </ul>
+
+    </div>
+</content>
+
+<content id="placeholder-content">
+    <style>
+        /* Insert your CSS overrides here */
+        .template--listNewsLayout {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .template--listNewsLayoutItem--result {
+            display: flex;
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-bottom-color: {{@root.theme.palette.neutralLight}};
+        }
+
+        .template--listNewsLayoutItem--thumbnail {
+            width: 276px;
+            height: 156px;
+            margin-right: 28px;
+        }
+
+        .template--listNewsLayoutItem--content {
+            flex-basis: 0;
+            flex-grow: 1;
+            justify-content: space-between;
+            max-width: 100%;
+            overflow: hidden;
+        }
+    </style>
+
+    <div class="placeholder">
+        <ul class="template--listNewsLayout">
+            {{#times @root.properties.paging.itemsCountPerPage}}
+            <li tabindex="0">
+                <div class="template--listNewsLayoutItem--result">
+
+                    <div class="template--listNewsLayoutItem--content">
+                        <span class="placeholder--shimmer placeholder--line" style="width: 35%"></span>
+                        <span class="placeholder--shimmer placeholder--line" style="width: 100%"></span>
+                        <span class="placeholder--shimmer placeholder--line" style="width: 100%"></span>
+                    </div>
+                </div>
+            </li>
+            {{/times}}
+        </ul>
+    </div>
+
+</content>
